@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class single_event extends Model
 {
-    use HasFactory;
+  use HasFactory;
+  protected $fillable = ['title', 'date'];
 }

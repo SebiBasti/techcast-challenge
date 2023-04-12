@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\single_event;
+use App\Models\Single_event;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -30,9 +31,17 @@ class SingleEventController extends Controller
   /**
    * Store a newly created resource in storage.
    */
-  public function store(Request $request)
+  public function store(Request $request): RedirectResponse
   {
-    //
+    $request->validate([
+      'title' => 'required|string|max:255',
+      'date' => 'required',
+    ]);
+    $single_event = Single_event::create([
+      'title' => $request->title,
+      'date' => $request->date,
+    ]);
+    return redirect(route('single_event.index'));
   }
 
   /**
