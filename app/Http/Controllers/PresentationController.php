@@ -22,15 +22,7 @@ class PresentationController extends Controller
       'conferences' => Conference::all(),
       'presentations' => Presentation::with('presentable')->get(),
     ];
-    return Inertia::render('presentation/index', $props);
-  }
-
-  /**
-   * Show the form for creating a new resource.
-   */
-  public function create()
-  {
-    //
+    return Inertia::render('Presentation/Index', $props);
   }
 
   /**
@@ -58,37 +50,5 @@ class PresentationController extends Controller
     $presentable->presentations()->save($presentation);
 
     return redirect(route('presentations.index'));
-  }
-
-  /**
-   * Display the specified resource.
-   */
-  public function show(presentation $presentation)
-  {
-    //
-  }
-
-  /**
-   * Show the form for editing the specified resource.
-   */
-  public function edit(presentation $presentation)
-  {
-    //
-  }
-
-  /**
-   * Update the specified resource in storage.
-   */
-  public function update(Request $request, presentation $presentation)
-  {
-    //
-  }
-
-  /**
-   * Remove the specified resource from storage.
-   */
-  public function destroy(presentation $presentation)
-  {
-    //
   }
 }

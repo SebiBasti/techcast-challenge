@@ -20,12 +20,7 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-  return Inertia::render('Welcome', [
-    'canLogin' => Route::has('login'),
-    'canRegister' => Route::has('register'),
-    'laravelVersion' => Application::VERSION,
-    'phpVersion' => PHP_VERSION,
-  ]);
+  return Inertia::render('Home');
 });
 
 Route::get('/dashboard', function () {
@@ -35,15 +30,15 @@ Route::get('/dashboard', function () {
   ->name('dashboard');
 
 Route::resource('single-events', SingleEventController::class)
-  ->only(['index', 'show', 'store'])
+  ->only(['index', 'store'])
   ->middleware(['auth']);
 
 Route::resource('conferences', ConferenceController::class)
-  ->only(['index', 'show', 'store'])
+  ->only(['index', 'store'])
   ->middleware(['auth']);
 
 Route::resource('presentations', PresentationController::class)
-  ->only(['index', 'show', 'store'])
+  ->only(['index', 'store'])
   ->middleware(['auth']);
 
 Route::middleware('auth')->group(function () {

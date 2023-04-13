@@ -1,0 +1,11 @@
+.navbar {
+    display: flex;
+    justify-content: center;
+}
+
+.navbar > a {
+    margin: 0 1rem;
+    padding: 0.5rem 1rem;
+    text-decoration: underline;
+    font-weight: bold;
+}

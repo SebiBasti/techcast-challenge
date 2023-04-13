@@ -1,0 +1,8 @@
+.select-event {
+    display: flex;
+    justify-content: space-between;
+}
+
+.select-event > div {
+    margin-top: 1rem;
+}

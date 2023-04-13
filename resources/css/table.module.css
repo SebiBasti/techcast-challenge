@@ -1,0 +1,38 @@
+.header {
+    margin: 2rem auto 1rem;
+    width: max-content;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-bottom: 1px dotted black;
+}
+
+.table {
+    margin: 0 auto;
+    table-layout: fixed;
+    width: 100%;
+}
+
+.table th {
+    text-align: left;
+    padding: 0.5rem 1rem 0.5rem 0;
+    border-bottom: 1px solid black;
+}
+
+.table th:first-child {
+    width: 30%;
+}
+
+.table th:nth-child(2) {
+    width: 40%;
+}
+
+.table th:last-child {
+    width: 30%;
+}
+
+.table td {
+    width: calc(100% / 3);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0.5rem 1rem 0.5rem 0;
+}
