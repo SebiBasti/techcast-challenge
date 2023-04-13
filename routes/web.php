@@ -29,17 +29,20 @@ Route::get('/dashboard', function () {
   ->middleware(['auth', 'verified'])
   ->name('dashboard');
 
-Route::resource('single-events', SingleEventController::class)
-  ->only(['index', 'store'])
-  ->middleware(['auth']);
+Route::resource('single-events', SingleEventController::class)->only([
+  'index',
+  'store',
+]);
 
-Route::resource('conferences', ConferenceController::class)
-  ->only(['index', 'store'])
-  ->middleware(['auth']);
+Route::resource('conferences', ConferenceController::class)->only([
+  'index',
+  'store',
+]);
 
-Route::resource('presentations', PresentationController::class)
-  ->only(['index', 'store'])
-  ->middleware(['auth']);
+Route::resource('presentations', PresentationController::class)->only([
+  'index',
+  'store',
+]);
 
 Route::middleware('auth')->group(function () {
   Route::get('/profile', [ProfileController::class, 'edit'])->name(
