@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
-class presentation extends Model
+class Presentation extends Model
 {
   use HasFactory;
   protected $fillable = [
@@ -14,7 +15,8 @@ class presentation extends Model
     'presentable_id',
     'presentable_type',
   ];
-  public function presentable()
+  protected $with = ['presentable'];
+  public function presentable(): MorphTo
   {
     return $this->morphTo();
   }

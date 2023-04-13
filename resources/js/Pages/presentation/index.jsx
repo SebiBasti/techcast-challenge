@@ -14,11 +14,11 @@ export default function Index({ auth }) {
     presentable_id: null
   })
 
-  const { conferences, single_events } = usePage().props
+  const { conferences, singleEvents, presentations } = usePage().props
+  console.log(presentations)
 
   const submit = (e) => {
     e.preventDefault()
-    console.log(data)
     post(route('presentations.store'), { onSuccess: () => reset() })
   }
 
@@ -60,18 +60,18 @@ export default function Index({ auth }) {
                 <option
                   key={conference.id}
                   value={conference.id}
-                  data-presentable-type="conference"
+                  data-presentable-type="App\Models\Conference"
                 >
                   {conference.title}
                 </option>
               ))}
             </optgroup>
             <optgroup label="Single events">
-              {single_events.map((single_event) => (
+              {singleEvents.map((single_event) => (
                 <option
                   key={single_event.id}
                   value={single_event.id}
-                  data-presentable-type="single event"
+                  data-presentable-type="App\Models\SingleEvent"
                 >
                   {single_event.title}
                 </option>
@@ -85,6 +85,25 @@ export default function Index({ auth }) {
           </PrimaryButton>
         </form>
       </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Content</th>
+            <th>Event</th>
+          </tr>
+        </thead>
+        <tbody>
+          {presentations.map((presentation) => (
+            <tr key={presentation.id}>
+              <td>{presentation.title}</td>
+              <td>{presentation.content}</td>
+              <td>{presentation.presentable.title}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </>
   )
 }

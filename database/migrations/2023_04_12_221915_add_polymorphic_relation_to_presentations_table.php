@@ -12,8 +12,7 @@ class AddPolymorphicRelationToPresentationsTable extends Migration
   public function up(): void
   {
     Schema::table('presentations', function (Blueprint $table) {
-      $table->unsignedBigInteger('presentable_id');
-      $table->string('presentable_type');
+      $table->morphs('presentable');
     });
   }
 

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Single_event;
+use App\Models\SingleEvent;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -15,7 +15,7 @@ class SingleEventController extends Controller
    */
   public function index(): Response
   {
-    return Inertia::render('SingleEvent/Index', [
+    return Inertia::render('singleEvents/index', [
       //
     ]);
   }
@@ -37,11 +37,11 @@ class SingleEventController extends Controller
       'title' => 'required|string|max:255',
       'date' => 'required',
     ]);
-    $single_event = Single_event::create([
+    $single_event = SingleEvent::create([
       'title' => $request->title,
       'date' => $request->date,
     ]);
-    return redirect(route('single_event.index'));
+    return redirect(route('single-events.index'));
   }
 
   /**

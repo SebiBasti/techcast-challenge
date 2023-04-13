@@ -15,7 +15,7 @@ class ConferenceController extends Controller
    */
   public function index(): Response
   {
-    return Inertia::render('Conference/Index', [
+    return Inertia::render('conferences/index', [
       //
     ]);
   }
@@ -41,7 +41,7 @@ class ConferenceController extends Controller
       'title' => $request->title,
       'date' => $request->date,
     ]);
-    return redirect(route('conference.index'));
+    return redirect(route('conferences.index'));
   }
 
   /**

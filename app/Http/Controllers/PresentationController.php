@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Presentation;
 use App\Models\Conference;
-use App\Models\Single_event;
+use App\Models\SingleEvent;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -18,10 +18,11 @@ class PresentationController extends Controller
   public function index(): Response
   {
     $props = [
-      'single_events' => Single_event::all(),
+      'singleEvents' => SingleEvent::all(),
       'conferences' => Conference::all(),
+      'presentations' => Presentation::with('presentable')->get(),
     ];
-    return Inertia::render('Presentation/Index', $props);
+    return Inertia::render('presentation/index', $props);
   }
 
   /**
@@ -40,22 +41,21 @@ class PresentationController extends Controller
     $validated = $request->validate([
       'title' => 'required|string|max:255',
       'content' => 'required|string',
-      'presentable_type' => 'required|in:conference,single_event',
+      'presentable_type' =>
+        'required|in:App\Models\Conference,App\Models\SingleEvent',
       'presentable_id' =>
         'required|exists:' .
-        ($request->input('presentable_type') == 'conference'
+        ($request->input('presentable_type') == 'App\Models\Conference'
           ? Conference::class
-          : Single_event::class) .
+          : SingleEvent::class) .
         ',id',
     ]);
-    $presentation = Presentation::create($validated);
+    $presentation = new Presentation($validated);
     $presentable =
-      $validated['presentable_type'] == 'Conferences'
+      $validated['presentable_type'] == 'App\Models\Conference'
         ? Conference::find(intval($validated['presentable_id']))
-        : Single_event::find(intval($validated['presentable_id']));
-    dd($presentation, $presentable);
-    $presentation->presentable()->associate($presentable);
-    $presentation->save();
+        : SingleEvent::find(intval($validated['presentable_id']));
+    $presentable->presentations()->save($presentation);
 
     return redirect(route('presentations.index'));
   }
